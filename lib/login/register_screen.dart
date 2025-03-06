@@ -1,4 +1,6 @@
+import 'package:course_app/app_routes.dart';
 import 'package:course_app/colors.dart';
+import 'package:course_app/text_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -11,19 +13,28 @@ class RegisterScreen extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-            Text('Crie sua conta'),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 16.w),
+              padding: EdgeInsets.symmetric(vertical: 16.h),
+              child: Text(
+                'Crie sua conta',
+                style: TextStyle(fontWeight: FontWeight.w900, fontSize: 36.sp),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25.w, vertical: 45.h),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('Nome'),
+                  greyText("Nome", tMargin: 20.sp),
                   TextField(),
-                  Text('E-mail'),
+                  SizedBox(height: 20.h),
+                  greyText('E-mail', tMargin: 20.sp),
                   TextField(),
-                  Text('Senha'),
+                  SizedBox(height: 20.h),
+                  greyText('Senha', tMargin: 20.sp),
                   TextField(),
-                  Text('Repita sua senha'),
+                  SizedBox(height: 20.h),
+                  greyText('Repita sua senha', tMargin: 20.sp),
                   TextField(),
                 ],
               ),
@@ -37,7 +48,50 @@ class RegisterScreen extends StatelessWidget {
                     color: loginButton,
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: Text('Continue com seu Email'),
+                  child: Center(
+                    child: Text(
+                      'Continue com seu Email',
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                 SizedBox(height: 20.sp),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 25.w),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Divider(thickness: 1, color: Colors.grey),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.symmetric(horizontal: 10.w),
+                        child: Text(
+                          'ou',
+                          style: TextStyle(fontSize: 16.sp, color: Colors.grey),
+                        ),
+                      ),
+                      Expanded(
+                        child: Divider(thickness: 1, color: Colors.grey),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(height: 20.sp),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Text('Já tem uma conta? '),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(AppRoute.login);
+                      },
+                      child: Text('LOGIN', style: TextStyle(color: Color(0xFF5C4BAF))),
+                    ),
+                  ],
                 ),
               ],
             ),

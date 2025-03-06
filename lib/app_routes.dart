@@ -1,3 +1,5 @@
 abstract class AppRoute {
-  static const home = '/';
+  static const home = '/home';
+  static const register = '/';
+  static const login = '/login';
 }

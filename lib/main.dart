@@ -19,7 +19,10 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
-        routes: {AppRoute.home: (context) => const RegisterScreen()},
+        routes: {
+          AppRoute.register: (context) => const RegisterScreen(),
+          AppRoute.login: (context) => const LoginScreen(),
+        },
       ),
     );
   }

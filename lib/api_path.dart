@@ -1,1 +1,1 @@
-final apiPath = 'https://course-platform.azurewebsites.net/';
+final apiPath = 'https://course-platform-node.onrender.com';

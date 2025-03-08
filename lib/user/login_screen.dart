@@ -1,4 +1,6 @@
-import 'package:course_app/login/fetch_login.dart';
+import 'package:course_app/app_routes.dart';
+import 'package:course_app/user/login_repo.dart';
+import 'package:course_app/user/login_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -27,9 +29,9 @@ class LoginScreen extends StatelessWidget {
           const SnackBar(content: Text('Login realizado com sucesso!')),
         );
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Erro ao fazer login: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('Erro ao fazer login: $e')));
       }
     }
 
@@ -51,17 +53,15 @@ class LoginScreen extends StatelessWidget {
                   TextField(controller: emailController),
                   SizedBox(height: 16.h),
                   Text('Senha'),
-                  TextField(
-                    controller: passwordController,
-                    obscureText: true,
-                  ),
+                  TextField(controller: passwordController, obscureText: true),
                 ],
               ),
               SizedBox(height: 24.h),
-              ElevatedButton(
-                onPressed: getLogin,
-                child: Text('Entrar'),
-              ),
+              ElevatedButton(onPressed: () async{
+                  await getLogin();
+                   Navigator.of(context).pushNamed(AppRoute.home);
+              },
+               child: Text('Entrar')),
             ],
           ),
         ),

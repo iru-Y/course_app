@@ -3,7 +3,7 @@ import 'package:course_app/api_path.dart';
 import 'package:http/http.dart' as http;
 
 Future<void> login(String email, String password) async {
-  final url = Uri.parse('$apiPath/v1/user');
+  final url = Uri.parse('$apiPath/v1/auth/login');
   final data = {'email': email, 'password': password};
 
   try {

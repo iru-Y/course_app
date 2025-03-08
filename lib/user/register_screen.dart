@@ -9,6 +9,16 @@ class RegisterScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final nameController = TextEditingController();
+    final passwordController = TextEditingController();
+    final passwordCheckController = TextEditingController();
+    final cpfController = TextEditingController();
+    final emailController = TextEditingController();
+
+    Future<void> sendRegister () async{
+      
+    }
+
     return SafeArea(
       child: Scaffold(
         body: Column(
@@ -26,16 +36,16 @@ class RegisterScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   greyText("Nome", tMargin: 20.sp),
-                  TextField(),
+                  TextField(controller: nameController,),
                   SizedBox(height: 20.h),
                   greyText('E-mail', tMargin: 20.sp),
-                  TextField(),
+                  TextField(controller: emailController),
                   SizedBox(height: 20.h),
                   greyText('Senha', tMargin: 20.sp),
-                  TextField(),
+                  TextField(controller: passwordController,),
                   SizedBox(height: 20.h),
                   greyText('Repita sua senha', tMargin: 20.sp),
-                  TextField(),
+                  TextField(controller: passwordCheckController,),
                 ],
               ),
             ),
@@ -59,7 +69,7 @@ class RegisterScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                 SizedBox(height: 20.sp),
+                SizedBox(height: 20.sp),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 25.w),
                   child: Row(
@@ -89,7 +99,10 @@ class RegisterScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).pushNamed(AppRoute.login);
                       },
-                      child: Text('LOGIN', style: TextStyle(color: Color(0xFF5C4BAF))),
+                      child: Text(
+                        'LOGIN',
+                        style: TextStyle(color: Color(0xFF5C4BAF)),
+                      ),
                     ),
                   ],
                 ),

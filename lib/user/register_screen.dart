@@ -104,6 +104,14 @@ class RegisterScreen extends StatelessWidget {
                         style: TextStyle(color: Color(0xFF5C4BAF)),
                       ),
                     ),
+                    InkWell(
+                      onTap: () {
+                        Navigator.of(context).pushNamed(AppRoute.home);
+                      },
+                      child: Text(
+                        'Skip',
+                        style: TextStyle(color: Color(0xFF5C4BAF)),
+                      )),
                   ],
                 ),
               ],

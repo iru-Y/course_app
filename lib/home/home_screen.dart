@@ -1,3 +1,4 @@
+import 'package:course_app/home/home_body.dart';
 import 'package:course_app/home/home_header.dart';
 import 'package:flutter/material.dart';
 
@@ -8,10 +9,13 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: const Scaffold(
-        body: Column(
-          children: [
-            HomeHeader()
-          ],
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              HomeHeader(),
+              HomeBody()
+            ],
+          ),
         ),
       ),
     );

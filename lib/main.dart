@@ -2,6 +2,7 @@ import 'package:course_app/app_routes.dart';
 import 'package:course_app/home/home_screen.dart';
 import 'package:course_app/user/login_screen.dart';
 import 'package:course_app/user/register_screen.dart';
+import 'package:course_app/video/video_upload.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -24,6 +25,7 @@ class MyApp extends StatelessWidget {
           AppRoute.register: (context) => const RegisterScreen(),
           AppRoute.login: (context) => const LoginScreen(),
           AppRoute.home: (context) => const HomeScreen(),
+          AppRoute.videoUpload: (context) => VideoUpload(),
         },
       ),
     );

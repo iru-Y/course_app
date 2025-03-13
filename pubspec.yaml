@@ -40,7 +40,7 @@ dependencies:
   file_picker: ^9.0.2
   video_thumbnail_imageview: ^0.0.6
   path_provider: ^2.0.15
-  persistent_bottom_nav_bar: ^6.2.1
+  video_player: ^2.5.1
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +68,7 @@ flutter:
   assets:
     - assets/loading_circles_blue_gradient.jpg
     - assets/transparent.png
+    - assets/hamburger.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
@@ -81,10 +82,10 @@ flutter:
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  # fonts:
-  #   - family: Schyler
-  #     fonts:
-  #       - asset: fonts/Schyler-Regular.ttf
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins(1)/Poppins-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
   #   - family: Trajan Pro

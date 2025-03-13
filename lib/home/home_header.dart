@@ -1,9 +1,17 @@
 import 'package:course_app/colors.dart';
+import 'package:course_app/widgets/search_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeHeader extends StatelessWidget {
-  const HomeHeader({super.key});
+  final TextEditingController searchController;
+  final ValueChanged<String> onSearchChanged;
+
+  const HomeHeader({
+    super.key,
+    required this.searchController,
+    required this.onSearchChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +23,7 @@ class HomeHeader extends StatelessWidget {
           bottomLeft: Radius.elliptical(30.r, 60.r),
         ),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 20.h),
+      padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 40.h),
       width: double.infinity,
       height: 250.h,
       child: Column(
@@ -23,29 +31,32 @@ class HomeHeader extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
+              const Row(
                 children: [
-                  Icon(Icons.abc, color: Colors.white),
-                  Text('Course platform'),
+                  Icon(Icons.school, color: Colors.white),
+                  SizedBox(width: 10),
+                  Text(
+                    'Course Platform',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                 ],
               ),
-              Icon(Icons.add_alert_sharp, color: Colors.white),
+              Builder(
+                builder: (context) => IconButton(
+                  icon: const Icon(Icons.menu, color: Colors.white),
+                  onPressed: () => Scaffold.of(context).openDrawer(),
+                ),
+              ),
             ],
           ),
-          SizedBox(height: 80.h),
-          Container(
-            width: double.infinity,
-            height: 54.h,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.all(Radius.circular(15.r)),
-            ),
-            child: TextField(
-              decoration: InputDecoration(
-                prefixIcon: Icon(Icons.search),
-                hintText: 'Pesquisar por cursos',
-              ),
-            ),
+          SizedBox(height: 40.h),
+          SearchHeader(
+            controller: searchController,
+            onChanged: onSearchChanged,
           ),
         ],
       ),

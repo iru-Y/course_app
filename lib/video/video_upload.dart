@@ -15,15 +15,12 @@ class _VideoUploadState extends State<VideoUpload> {
   final VideoRepository videoRepository = VideoRepository();
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
-
   String? _videoPath;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Upload de Vídeo"),
-      ),
+      appBar: AppBar(title: const Text("Upload de Vídeo")),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -67,7 +64,9 @@ class _VideoUploadState extends State<VideoUpload> {
             const SizedBox(height: 24),
             ElevatedButton(
               onPressed: _videoPath == null ? _selectVideo : _uploadVideo,
-              child: Text(_videoPath == null ? "Selecionar Vídeo" : "Enviar Vídeo"),
+              child: Text(
+                _videoPath == null ? "Selecionar Vídeo" : "Enviar Vídeo",
+              ),
             ),
           ],
         ),
@@ -80,48 +79,48 @@ class _VideoUploadState extends State<VideoUpload> {
       type: FileType.video,
     );
     if (result != null && result.files.single.path != null) {
-      setState(() {
-        _videoPath = result.files.single.path!;
-      });
+      setState(() => _videoPath = result.files.single.path!);
     }
   }
 
   Future<void> _uploadVideo() async {
     if (titleController.text.isEmpty || descriptionController.text.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Por favor, preencha o título e a descrição."),
-        ),
-      );
+      _showSnackBar("Preencha título e descrição");
       return;
     }
 
     if (_videoPath == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text("Por favor, selecione um vídeo."),
-        ),
-      );
+      _showSnackBar("Selecione um vídeo");
       return;
     }
 
-    VideoModel video = VideoModel(
-      title: titleController.text,
-      description: descriptionController.text,
-      videoPath: _videoPath!,
-    );
+    try {
+      await videoRepository.uploadVideo(
+        Video(
+          title: titleController.text,
+          description: descriptionController.text,
+          url: _videoPath!,
+        ),
+      );
 
-    await videoRepository.uploadVideo(video);
+      _resetForm();
+      _showSnackBar("Vídeo enviado com sucesso!", isError: false);
+    } catch (e) {
+      _showSnackBar("Erro no upload: ${e.toString()}");
+    }
+  }
 
-    setState(() {
-      titleController.clear();
-      descriptionController.clear();
-      _videoPath = null;
-    });
+  void _resetForm() {
+    titleController.clear();
+    descriptionController.clear();
+    setState(() => _videoPath = null);
+  }
 
+  void _showSnackBar(String message, {bool isError = true}) {
     ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(
-        content: Text("Vídeo enviado com sucesso!"),
+      SnackBar(
+        content: Text(message),
+        backgroundColor: isError ? Colors.red : Colors.green,
       ),
     );
   }

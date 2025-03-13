@@ -1,5 +1,4 @@
 import 'package:course_app/colors.dart';
-import 'package:course_app/widgets/search_header.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -54,11 +53,28 @@ class HomeHeader extends StatelessWidget {
             ],
           ),
           SizedBox(height: 40.h),
-          SearchHeader(
-            controller: searchController,
-            onChanged: onSearchChanged,
-          ),
+          _buildSearchField(),
         ],
+      ),
+    );
+  }
+
+  Widget _buildSearchField() {
+    return Container(
+      height: 54.h,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(15.r),
+      ),
+      child: TextField(
+        controller: searchController,
+        onChanged: onSearchChanged,
+        decoration: const InputDecoration(
+          prefixIcon: Icon(Icons.search),
+          hintText: 'Pesquisar por cursos',
+          border: InputBorder.none,
+          contentPadding: EdgeInsets.symmetric(horizontal: 20),
+        ),
       ),
     );
   }

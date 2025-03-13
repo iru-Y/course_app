@@ -31,7 +31,7 @@ class _VideoPlayerPageState extends State<VideoPlayerPage> {
       });
 
       final Video? video = await VideoRepository().getVideoById(_videoId);
-
+    
       if (!mounted) return;
 
       if (video == null) {

@@ -10,12 +10,12 @@ class CustomForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.all(30.w),
+      margin: EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       width: double.infinity,
       height: 60.h,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(30),
+        borderRadius: BorderRadius.circular(10),
         border: Border.all(color: Colors.black),
       ),
       child: Center(

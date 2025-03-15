@@ -14,7 +14,7 @@ class ProfileUser extends StatelessWidget {
         body: Column(
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.w, horizontal: 8.w),
+              padding: EdgeInsets.symmetric(vertical: 16.w, horizontal: 8.w),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -27,7 +27,23 @@ class ProfileUser extends StatelessWidget {
                 ],
               ),
             ),
-            CustomForm(hintText: 'Nome completo', controller:  fullNameController,),
+            SizedBox(height:  34.h,),
+            CustomForm(
+              hintText: 'Nome completo',
+              controller: fullNameController,
+            ),
+            CustomForm(hintText: 'Email', controller: fullNameController),
+            CustomForm(hintText: 'cpf', controller: fullNameController),
+            GestureDetector(onTap: () => {}, child: Container(
+              margin:  EdgeInsets.only(top:  24.h),
+              width:  342.w,
+              height:  44.h,
+              decoration:  BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                color:  Colors.blue
+              ),
+              child: Center(child: Text('Salvar', style:  TextStyle(color:  Colors.white),),),
+            )),
           ],
         ),
       ),

@@ -27,7 +27,7 @@ class ProfileUser extends StatelessWidget {
                 ],
               ),
             ),
-            CustomForm(text: 'Nome completo', controller: fullNameController,),
+            CustomForm(hintText: 'Nome completo', controller:  fullNameController,),
           ],
         ),
       ),

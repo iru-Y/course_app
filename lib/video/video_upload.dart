@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:video_thumbnail_imageview/video_thumbnail_imageview.dart';
 
 class VideoUpload extends StatefulWidget {
-  const VideoUpload({Key? key}) : super(key: key);
+  const VideoUpload({super.key});
 
   @override
   State<VideoUpload> createState() => _VideoUploadState();

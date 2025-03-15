@@ -8,8 +8,16 @@ class DrawerMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: GestureDetector(
-        onTap: () => {Navigator.of(context).pushNamed(AppRoute.profilePage)},
-        child: Container(child: Text('Esse é o drawer')),
+        child: Column(
+          children: [
+            GestureDetector(
+              onTap: () => {
+                Navigator.of(context).pushNamed(AppRoute.profilePage)
+              },
+              child: Container(child: Text('Perfil do usuário')),
+            ),
+          ],
+        ),
       ),
     );
   }

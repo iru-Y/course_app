@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
 class VideoPlayerPage extends StatefulWidget {
+  const VideoPlayerPage({super.key});
+
   @override
   _VideoPlayerPageState createState() => _VideoPlayerPageState();
 }

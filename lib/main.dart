@@ -1,6 +1,7 @@
 import 'package:course_app/app_routes.dart';
 import 'package:course_app/home/home_screen.dart';
 import 'package:course_app/user/login_screen.dart';
+import 'package:course_app/user/profile_user.dart';
 import 'package:course_app/user/register_screen.dart';
 import 'package:course_app/video/video_player_page.dart';
 import 'package:course_app/video/video_upload.dart';
@@ -14,7 +15,6 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -30,9 +30,9 @@ class MyApp extends StatelessWidget {
           AppRoute.login: (context) => const LoginScreen(),
           AppRoute.home: (context) => const HomeScreen(),
           AppRoute.videoUpload: (context) => VideoUpload(),
-          AppRoute.showVideo: (context) => VideoPlayerPage()
+          AppRoute.showVideo: (context) => VideoPlayerPage(),
+          AppRoute.profilePage: (context) => ProfileUser()
         },
-        
       ),
     );
   }

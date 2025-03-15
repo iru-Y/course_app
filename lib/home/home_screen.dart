@@ -1,3 +1,4 @@
+import 'package:course_app/app_routes.dart';
 import 'package:course_app/home/home_body.dart';
 import 'package:course_app/home/home_header.dart';
 import 'package:course_app/video/video_model.dart';
@@ -41,10 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
   void _handleSearch(String query) {
     final searchText = query.toLowerCase();
     setState(() {
-      _filteredVideos = _allVideos.where((video) {
-        final title = video.title?.toLowerCase() ?? '';
-        return title.contains(searchText);
-      }).toList();
+      _filteredVideos =
+          _allVideos.where((video) {
+            final title = video.title?.toLowerCase() ?? '';
+            return title.contains(searchText);
+          }).toList();
       _showSearchResults = query.isNotEmpty;
     });
   }
@@ -70,7 +72,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
                 Expanded(
                   child: SingleChildScrollView(
-                    child: HomeBody(videos: _showSearchResults ? _filteredVideos : _allVideos),
+                    child: HomeBody(
+                      videos: _showSearchResults ? _filteredVideos : _allVideos,
+                    ),
                   ),
                 ),
               ],
@@ -96,7 +100,11 @@ class SearchResultsOverlay extends StatelessWidget {
   final List<Video> results;
   final VoidCallback onClose;
 
-  const SearchResultsOverlay({super.key, required this.results, required this.onClose});
+  const SearchResultsOverlay({
+    super.key,
+    required this.results,
+    required this.onClose,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -120,7 +128,17 @@ class SearchResultsOverlay extends StatelessWidget {
               subtitle: Text(video.description ?? 'Sem descrição'),
               onTap: () {
                 onClose();
-                // Adicione navegação para detalhes do vídeo
+                if (video.sId != null) {
+                  Navigator.pushNamed(
+                    context,
+                    AppRoute.showVideo,
+                    arguments: video.sId,
+                  );
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Vídeo não encontrado')),
+                  );
+                }
               },
             );
           },

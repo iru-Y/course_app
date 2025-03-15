@@ -22,9 +22,9 @@ class HomeHeader extends StatelessWidget {
           bottomLeft: Radius.elliptical(30.r, 60.r),
         ),
       ),
-      padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 40.h),
+      padding: EdgeInsets.symmetric(horizontal: 40.w, vertical: 20.h),
       width: double.infinity,
-      height: 250.h,
+      height: 210.h,
       child: Column(
         children: [
           Row(

@@ -1,5 +1,4 @@
 import 'package:course_app/video/video_model.dart';
-import 'package:course_app/widgets/card_video.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -68,6 +67,7 @@ class HomeBody extends StatelessWidget {
                         icon: const Icon(Icons.play_circle_fill, 
                           color: Colors.white, size: 40),
                         onPressed: () {
+                          
                         },
                       ),
                     ),

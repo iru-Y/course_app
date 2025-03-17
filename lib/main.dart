@@ -29,9 +29,9 @@ class MyApp extends StatelessWidget {
           AppRoute.register: (context) => const RegisterScreen(),
           AppRoute.login: (context) => const LoginScreen(),
           AppRoute.home: (context) => const HomeScreen(),
-          AppRoute.videoUpload: (context) => VideoUpload(),
-          AppRoute.showVideo: (context) => VideoPlayerPage(),
-          AppRoute.profilePage: (context) => ProfileUser()
+          AppRoute.videoUpload: (context) => const VideoUpload(),
+          AppRoute.showVideo: (context) => const VideoPlayerPage(),
+          AppRoute.profilePage: (context) => const ProfileUser()
         },
       ),
     );

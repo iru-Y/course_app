@@ -10,7 +10,7 @@ class CustomForm extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(horizontal: 30.w, vertical: 10.h),
+      margin: EdgeInsets.symmetric(horizontal: 5.w, vertical: 10.h),
       padding: EdgeInsets.symmetric(horizontal: 20.w),
       width: double.infinity,
       height: 60.h,

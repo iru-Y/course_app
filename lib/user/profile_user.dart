@@ -1,4 +1,4 @@
-import 'package:course_app/widgets/form.dart';
+import 'package:course_app/widgets/custom_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
@@ -34,16 +34,7 @@ class ProfileUser extends StatelessWidget {
             ),
             CustomForm(hintText: 'Email', controller: fullNameController),
             CustomForm(hintText: 'cpf', controller: fullNameController),
-            GestureDetector(onTap: () => {}, child: Container(
-              margin:  EdgeInsets.only(top:  24.h),
-              width:  342.w,
-              height:  44.h,
-              decoration:  BoxDecoration(
-                borderRadius: BorderRadius.circular(15),
-                color:  Colors.blue
-              ),
-              child: Center(child: Text('Salvar', style:  TextStyle(color:  Colors.white),),),
-            )),
+           
           ],
         ),
       ),

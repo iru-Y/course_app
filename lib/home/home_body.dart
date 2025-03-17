@@ -1,33 +1,33 @@
-import 'package:course_app/video/video_model.dart';
+import 'package:course_app/course/course_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeBody extends StatelessWidget {
-  final List<Video> videos;
+  final List<CourseModel> courses;
 
-  const HomeBody({super.key, required this.videos});
+  const HomeBody({super.key, required this.courses});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         const _SectionHeader(title: 'Seus cursos', buttonText: 'Ver todos'),
-        _buildVideoList(),
+        _buildCourseList(),
         const _SectionHeader(title: 'Cursos salvos', buttonText: 'Ver todos'),
-        _buildVideoList(),
+        _buildCourseList(),
         SizedBox(height: 20.h),
       ],
     );
   }
 
-  Widget _buildVideoList() {
+  Widget _buildCourseList() {
     return SizedBox(
       height: 186.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: videos.length,
+        itemCount: courses.length,
         itemBuilder: (context, index) {
-          final video = videos[index];
+          final course = courses[index];
           return SizedBox(
             width: 324.w,
             child: Card(
@@ -45,7 +45,7 @@ class HomeBody extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      video.title ?? 'Sem título',
+                      course.title ?? 'Sem título',
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
@@ -55,7 +55,7 @@ class HomeBody extends StatelessWidget {
                     const SizedBox(height: 8),
                     Expanded(
                       child: Text(
-                        video.description ?? 'Sem descrição',
+                        course.description ?? 'Sem descrição',
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(color: Colors.white70),
@@ -64,10 +64,13 @@ class HomeBody extends StatelessWidget {
                     Align(
                       alignment: Alignment.centerRight,
                       child: IconButton(
-                        icon: const Icon(Icons.play_circle_fill, 
-                          color: Colors.white, size: 40),
+                        icon: const Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white,
+                          size: 40,
+                        ),
                         onPressed: () {
-                          
+                          // Implemente a ação ao clicar no botão
                         },
                       ),
                     ),
@@ -82,7 +85,9 @@ class HomeBody extends StatelessWidget {
   }
 
   LinearGradient _randomGradient() {
-    return LinearGradient(colors: [Colors.blue, Colors.indigo]);
+    return const LinearGradient(
+      colors: [Colors.blue, Colors.indigo],
+    );
   }
 }
 
@@ -110,7 +115,9 @@ class _SectionHeader extends StatelessWidget {
             ),
           ),
           TextButton(
-            onPressed: () {},
+            onPressed: () {
+              // Implemente a ação para o botão "Ver todos"
+            },
             child: Text(buttonText),
           ),
         ],

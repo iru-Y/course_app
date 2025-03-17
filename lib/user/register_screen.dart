@@ -178,6 +178,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         'Pular',
                         style: TextStyle(color: Color(0xFF5C4BAF)),
                       ),
+                      
+                    ),
+                     InkWell(
+                      onTap: () => Navigator.pushNamed(context, AppRoute.progress),
+                      child: Text(
+                        'Progress',
+                        style: TextStyle(color: Color(0xFF5C4BAF)),
+                      ),
+                      
                     ),
                   ],
                 ),

@@ -4,10 +4,13 @@ import 'package:http/http.dart' as http;
 import 'progress_model.dart';
 
 class ProgressRepository {
-
   Future<Progress?> getProgress(String userId, String courseId) async {
     try {
-      final response = await http.get(Uri.parse('$apiPath/v1/progress?userId=67cb61fe6e3e9b7fb2317ce1&courseId=67c760e629e61e905add3197'));
+      final response = await http.get(
+        Uri.parse(
+          '$apiPath/v1/progress/67cb61fe6e3e9b7fb2317ce1/67c760e629e61e905add3197',
+        ),
+      );
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> json = jsonDecode(response.body);

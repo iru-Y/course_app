@@ -6,18 +6,20 @@ class ProgressPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-            Container(
-              child:  Column(
-                children: [
-                  ProgressCard()
-                    
-                ],
-              ),
-            )
-        ],
+    return SafeArea(
+      child: Scaffold(
+        body: Column(
+          children: [
+              Container(
+                child:  Column(
+                  children: [
+                    ProgressCard()
+                      
+                  ],
+                ),
+              )
+          ],
+        ),
       ),
     );
   }

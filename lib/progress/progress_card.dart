@@ -1,5 +1,7 @@
+import 'package:course_app/colors.dart';
 import 'package:course_app/progress/progress_repository.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ProgressCard extends StatelessWidget {
   const ProgressCard({super.key});
@@ -26,11 +28,30 @@ class ProgressCard extends StatelessWidget {
           return const Center(child: Text('Nenhum curso encontrado'));
         }
         final lastCompletedVideo = progress.completedVideos!.first;
-        return Scaffold(
-          body: Column(
-            children: [
-              Text(lastCompletedVideo.title!)
-            ],
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+              children: [
+                Center(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(color: gText)
+                    ),
+                    width: 300,
+                    height: 120,
+                    padding:  EdgeInsets.symmetric(vertical:  20.h, horizontal: 10.w),
+                    child: Column(
+                      crossAxisAlignment:  CrossAxisAlignment.start,
+                      children: [
+                        Text(lastCompletedVideo.title!, style:  TextStyle(
+                          color: gText
+                        ),),
+                        Text(lastCompletedVideo.description!)
+                      ],
+                    )),
+                )
+              ],
+            
           ),
         );
       },

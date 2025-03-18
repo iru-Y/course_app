@@ -1,4 +1,5 @@
 import 'package:course_app/progress/progress_card.dart';
+import 'package:course_app/widgets/card_video.dart';
 import 'package:flutter/material.dart';
 
 class ProgressPage extends StatelessWidget {
@@ -10,14 +11,7 @@ class ProgressPage extends StatelessWidget {
       child: Scaffold(
         body: Column(
           children: [
-              Container(
-                child:  Column(
-                  children: [
-                    ProgressCard()
-                      
-                  ],
-                ),
-              )
+                ShowCardVideo()
           ],
         ),
       ),

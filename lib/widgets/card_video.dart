@@ -53,7 +53,7 @@ class ShowCardVideo extends StatelessWidget {
 
         return SizedBox(
           width: double.infinity,
-          height: 186.h,
+          height: 250.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: videos.length,

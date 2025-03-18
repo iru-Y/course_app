@@ -10,7 +10,7 @@ class ProgressCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final ProgressRepository progressRepository = ProgressRepository();
     final userId = '';
-    final courseId = '';
+    final courseId = '';  
 
     return FutureBuilder(
       future: progressRepository.getProgress(userId, courseId),
@@ -27,7 +27,9 @@ class ProgressCard extends StatelessWidget {
         if (progress == null) {
           return const Center(child: Text('Nenhum curso encontrado'));
         }
+        
         final lastCompletedVideo = progress.completedVideos!.first;
+        
         return Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -35,23 +37,33 @@ class ProgressCard extends StatelessWidget {
                 Center(
                   child: Container(
                     decoration: BoxDecoration(
-                      border: Border.all(color: gText)
+                      border: Border.all(color: gText),
+                      borderRadius: BorderRadius.all(Radius.circular(20))
                     ),
                     width: 300,
                     height: 120,
                     padding:  EdgeInsets.symmetric(vertical:  20.h, horizontal: 10.w),
-                    child: Column(
-                      crossAxisAlignment:  CrossAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(lastCompletedVideo.title!, style:  TextStyle(
-                          color: gText
-                        ),),
-                        Text(lastCompletedVideo.description!)
+                        Column(
+                          crossAxisAlignment:  CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              lastCompletedVideo.title!, style:  TextStyle(
+                              color: gText
+                            ),),
+                            Text(lastCompletedVideo.description!, style: TextStyle(
+                              fontSize: 18.sp
+                            ),)
+                          ],
+                        ),
+                       Image.asset('assets/loading_circles_blue_gradient.jpg')
                       ],
                     )),
                 )
               ],
-            
+              
           ),
         );
       },

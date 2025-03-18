@@ -1,3 +1,4 @@
+import 'package:course_app/app_routes.dart';
 import 'package:course_app/widgets/custom_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -18,7 +19,9 @@ class ProfileUser extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Icon(Icons.arrow_back),
+                  InkWell(
+                    onTap: ()=> {Navigator.of(context).pushNamed(AppRoute.home)},
+                    child: Icon(Icons.arrow_back)),
                   Text(
                     'Editar seu perfil',
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900),

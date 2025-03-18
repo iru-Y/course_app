@@ -50,13 +50,13 @@ class CourseCard extends StatelessWidget {
         }
 
         return SizedBox(
-          width: double.infinity,
+          width: 300.w,
           height: 186.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: courses.length,
             itemBuilder: (context, index) {
-              final course = courses[index];
+              final course = courses.first;
               return SizedBox(
                 width: 324.w,
                 child: Card(
@@ -92,7 +92,6 @@ class CourseCard extends StatelessWidget {
                           overflow: TextOverflow.ellipsis,
                           style: const TextStyle(color: Colors.white70),
                         ),
-                        // Você pode incluir outras informações como preço, módulos, etc.
                         const Spacer(),
                         Align(
                           alignment: Alignment.centerRight,

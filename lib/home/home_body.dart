@@ -1,3 +1,4 @@
+import 'package:course_app/course/course_card.dart';
 import 'package:course_app/course/course_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -28,57 +29,7 @@ class HomeBody extends StatelessWidget {
         itemCount: courses.length,
         itemBuilder: (context, index) {
           final course = courses[index];
-          return SizedBox(
-            width: 324.w,
-            child: Card(
-              margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 15),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(12),
-                  gradient: _randomGradient(),
-                ),
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      course.title ?? 'Sem título',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    Expanded(
-                      child: Text(
-                        course.description ?? 'Sem descrição',
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(color: Colors.white70),
-                      ),
-                    ),
-                    Align(
-                      alignment: Alignment.centerRight,
-                      child: IconButton(
-                        icon: const Icon(
-                          Icons.arrow_forward,
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                        onPressed: () {
-                          // Implemente a ação ao clicar no botão
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
+          return CourseCard();
         },
       ),
     );
@@ -116,7 +67,7 @@ class _SectionHeader extends StatelessWidget {
           ),
           TextButton(
             onPressed: () {
-              // Implemente a ação para o botão "Ver todos"
+
             },
             child: Text(buttonText),
           ),

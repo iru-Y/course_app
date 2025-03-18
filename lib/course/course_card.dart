@@ -72,7 +72,10 @@ class CourseCard extends StatelessWidget {
                       gradient: _randomGradient(),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 16),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 16,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
@@ -93,6 +96,7 @@ class CourseCard extends StatelessWidget {
                           style: const TextStyle(color: Colors.white70),
                         ),
                         const Spacer(),
+                        Text(course.price!),
                         Align(
                           alignment: Alignment.centerRight,
                           child: IconButton(
@@ -110,7 +114,9 @@ class CourseCard extends StatelessWidget {
                                 );
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(content: Text('Curso não encontrado')),
+                                  const SnackBar(
+                                    content: Text('Curso não encontrado'),
+                                  ),
                                 );
                               }
                             },

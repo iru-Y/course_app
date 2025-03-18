@@ -12,9 +12,9 @@ class HomeBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const _SectionHeader(title: 'Seus cursos', buttonText: 'Ver todos'),
+        const _SectionHeader(title: 'Confira os novos cursos!', buttonText: 'Ver todos'),
         _buildCourseList(),
-        const _SectionHeader(title: 'Cursos salvos', buttonText: 'Ver todos'),
+        const _SectionHeader(title: 'Seus cursos', buttonText: 'Ver todos'),
         _buildCourseList(),
         SizedBox(height: 20.h),
       ],
@@ -34,6 +34,7 @@ class HomeBody extends StatelessWidget {
       ),
     );
   }
+
 
   LinearGradient _randomGradient() {
     return const LinearGradient(

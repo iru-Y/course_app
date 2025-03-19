@@ -50,7 +50,7 @@ class CourseCard extends StatelessWidget {
         }
 
         return SizedBox(
-          width: 300.w,
+          width: 500.w,
           height: 186.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
@@ -72,12 +72,14 @@ class CourseCard extends StatelessWidget {
                       gradient: _randomGradient(),
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 16,
+                    padding:  EdgeInsets.only(
+                      top: 10.h,
+                      bottom: 40.h,
+                      right: 20.w,
+                      left: 20.w
                     ),
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                      crossAxisAlignment:  CrossAxisAlignment.start,
                       children: [
                         Text(
                           course.title ?? 'Sem título',
@@ -96,7 +98,7 @@ class CourseCard extends StatelessWidget {
                           style: const TextStyle(color: Colors.white70),
                         ),
                         const Spacer(),
-                        Text(course.price!),
+
                         Align(
                           alignment: Alignment.centerRight,
                           child: IconButton(
@@ -121,6 +123,13 @@ class CourseCard extends StatelessWidget {
                               }
                             },
                           ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: 20),
+                          child: Text('Preço: ' + course.price!, style:  TextStyle(
+                            color:  Colors.white,
+                            fontWeight:  FontWeight.w900
+                          ),),
                         ),
                       ],
                     ),

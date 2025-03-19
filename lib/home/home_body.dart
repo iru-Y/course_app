@@ -23,6 +23,7 @@ class HomeBody extends StatelessWidget {
 
   Widget _buildCourseList() {
     return SizedBox(
+      width: double.infinity,
       height: 186.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,

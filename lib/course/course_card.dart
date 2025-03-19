@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'package:course_app/app_routes.dart';
 import 'package:course_app/course/course_model.dart';
 import 'package:course_app/course/course_repository.dart';
 import 'package:flutter/material.dart';
@@ -74,65 +73,58 @@ class CourseCard extends StatelessWidget {
                     ),
                     padding:  EdgeInsets.only(
                       top: 10.h,
-                      bottom: 40.h,
+                      bottom: 20.h,
                       right: 20.w,
                       left: 20.w
                     ),
-                    child: Column(
-                      crossAxisAlignment:  CrossAxisAlignment.start,
+                    child: Row(
+                      mainAxisAlignment:  MainAxisAlignment.spaceAround,
                       children: [
-                        Text(
-                          course.title ?? 'Sem título',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18,
-                            color: Colors.white,
-                          ),
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          course.description ?? 'Sem descrição',
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(color: Colors.white70),
-                        ),
-                        const Spacer(),
-
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: IconButton(
-                            icon: const Icon(
-                              Icons.play_circle_fill,
-                              color: Colors.white,
-                              size: 50,
+                        Column(
+                          crossAxisAlignment:  CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              course.title ?? 'Sem título',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                                color: Colors.white,
+                              ),
+                              overflow: TextOverflow.ellipsis,
                             ),
-                            onPressed: () {
-                              if (course.id != null) {
-                                Navigator.pushNamed(
-                                  context,
-                                  AppRoute.showVideo,
-                                  arguments: course.id,
-                                );
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Curso não encontrado'),
-                                  ),
-                                );
-                              }
-                            },
+                            const SizedBox(height: 4),
+                            Text(
+                              course.description ?? 'Sem descrição',
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(color: Colors.white70),
+                            ),
+                            const Spacer(),
+                        
+                            Padding(
+                              padding: const EdgeInsets.only(bottom: 20),
+                              child: Text('Preço: ' + course.price!, style:  TextStyle(
+                                color:  Colors.white,
+                                fontSize:  18.sp,
+                                fontWeight:  FontWeight.w900
+                              ),),
+                            ),
+                          ],
+                        ),
+                        Container(
+                          decoration:  BoxDecoration(
+                            image:  DecorationImage(image: AssetImage('assets/loading_circles_blue_gradient.jpg'),
+                            fit: BoxFit.cover
+                            ),
+                            
+                            borderRadius: BorderRadius.circular(100)
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(bottom: 20),
-                          child: Text('Preço: ' + course.price!, style:  TextStyle(
-                            color:  Colors.white,
-                            fontWeight:  FontWeight.w900
-                          ),),
-                        ),
+                          width:  90.w,
+                          height:  90.h,
+                          
+                          )
                       ],
-                    ),
+                                          ),
                   ),
                 ),
               );

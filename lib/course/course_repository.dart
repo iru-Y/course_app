@@ -7,18 +7,16 @@ class CourseRepository {
   Future<List<CourseModel>> getCourses() async {
     try {
       final response = await http.get(Uri.parse("$apiPath/v1/course"));
-      
+
       print('Status Code: ${response.statusCode}');
       print('Response Body: ${response.body}');
 
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-        
+
         final List<dynamic> coursesList = jsonResponse['courses'];
-        
-        return coursesList
-            .map((json) => CourseModel.fromJson(json))
-            .toList();
+
+        return coursesList.map((json) => CourseModel.fromJson(json)).toList();
       } else {
         throw Exception('Falha ao carregar cursos: ${response.statusCode}');
       }
@@ -28,6 +26,15 @@ class CourseRepository {
     }
   }
 
-  Future
+  Future<CourseModel?> getUserByEmail(String email) async {
+    final response = await http.get(Uri.parse("$apiPath/v1/course/{email}"));
 
+    if (response.statusCode == 200) {
+      final jsonResponse = jsonDecode(response.body);
+
+      return jsonResponse;
+    } else {
+      throw Exception ('Fala ao carregar cursos por email : ${response.statusCode}');
+    }
+  }
 }

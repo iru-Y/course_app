@@ -13,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final LoginRepo loginRepo = LoginRepo();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -35,12 +36,13 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     try {
-      await login(email, password);
+      
+      await loginRepo.login(email, password);
       Navigator.pushNamed(context, AppRoute.home);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro ao fazer login: $e')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text('Erro ao fazer login: $e')));
     }
   }
 
@@ -63,25 +65,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(height: 24.h),
-              CustomForm(
-                hintText: 'E-mail',
-                controller: _emailController,
-              ),
+              CustomForm(hintText: 'E-mail', controller: _emailController),
               SizedBox(height: 16.h),
-              CustomForm(
-                hintText: 'Senha',
-                controller: _passwordController,
-              ),
+              CustomForm(hintText: 'Senha', controller: _passwordController),
               SizedBox(height: 24.h),
               Center(
-                child: DefaultButton(
-                  text: 'Entrar',
-                  navigador: _performLogin,
-                ),
+                child: DefaultButton(text: 'Entrar', navigador: _performLogin),
               ),
               Center(
                 child: TextButton(
-                  onPressed: () => Navigator.pushNamed(context, AppRoute.register),
+                  onPressed:
+                      () => Navigator.pushNamed(context, AppRoute.register),
                   child: Text('Criar nova conta'),
                 ),
               ),
@@ -92,4 +86,3 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 }
-

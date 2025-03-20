@@ -60,7 +60,12 @@ class CourseCard extends StatelessWidget {
               return SizedBox(
                 width: 324.w,
                 child: InkWell(
-                  onTap: () => {Navigator.of(context).pushNamed(AppRoute.course, arguments:  course.id)},
+                  onTap:
+                      () => {
+                        Navigator.of(
+                          context,
+                        ).pushNamed(AppRoute.course, arguments: course.id),
+                      },
                   child: Card(
                     margin: const EdgeInsets.symmetric(
                       vertical: 8,

@@ -1,4 +1,5 @@
 import 'package:course_app/app_routes.dart';
+import 'package:course_app/course/course_page.dart';
 import 'package:course_app/home/home_screen.dart';
 import 'package:course_app/progress/progress_page.dart';
 import 'package:course_app/user/login_screen.dart';
@@ -34,6 +35,7 @@ class MyApp extends StatelessWidget {
           AppRoute.showVideo: (context) => const VideoPlayerPage(),
           AppRoute.profilePage: (context) => const ProfileUser(),
           AppRoute.progress: (context) => const ProgressPage(),
+          AppRoute.course: (context) =>const  CoursePage()
         },
       ),
     );

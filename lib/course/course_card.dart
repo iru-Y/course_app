@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:course_app/app_routes.dart';
 import 'package:course_app/course/course_model.dart';
 import 'package:course_app/course/course_repository.dart';
 import 'package:flutter/material.dart';
@@ -58,73 +59,81 @@ class CourseCard extends StatelessWidget {
               final course = courses.first;
               return SizedBox(
                 width: 324.w,
-                child: Card(
-                  margin: const EdgeInsets.symmetric(
-                    vertical: 8,
-                    horizontal: 15,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      gradient: _randomGradient(),
+                child: InkWell(
+                  onTap: () => {Navigator.of(context).pushNamed(AppRoute.course, arguments:  course.id)},
+                  child: Card(
+                    margin: const EdgeInsets.symmetric(
+                      vertical: 8,
+                      horizontal: 15,
+                    ),
+                    shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12),
                     ),
-                    padding:  EdgeInsets.only(
-                      top: 10.h,
-                      bottom: 20.h,
-                      right: 20.w,
-                      left: 20.w
-                    ),
-                    child: Row(
-                      mainAxisAlignment:  MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          crossAxisAlignment:  CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              course.title ?? 'Sem título',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.white,
+                    child: Container(
+                      decoration: BoxDecoration(
+                        gradient: _randomGradient(),
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      padding: EdgeInsets.only(
+                        top: 10.h,
+                        bottom: 20.h,
+                        right: 20.w,
+                        left: 20.w,
+                      ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                course.title ?? 'Sem título',
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
+                                overflow: TextOverflow.ellipsis,
                               ),
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              course.description ?? 'Sem descrição',
-                              maxLines: 2,
-                              overflow: TextOverflow.ellipsis,
-                              style: const TextStyle(color: Colors.white70),
-                            ),
-                            const Spacer(),
-                        
-                            Padding(
-                              padding: const EdgeInsets.only(bottom: 20),
-                              child: Text('Preço: ' + course.price!, style:  TextStyle(
-                                color:  Colors.white,
-                                fontSize:  18.sp,
-                                fontWeight:  FontWeight.w900
-                              ),),
-                            ),
-                          ],
-                        ),
-                        Container(
-                          decoration:  BoxDecoration(
-                            image:  DecorationImage(image: AssetImage('assets/loading_circles_blue_gradient.jpg'),
-                            fit: BoxFit.cover
-                            ),
-                            
-                            borderRadius: BorderRadius.circular(100)
+                              const SizedBox(height: 4),
+                              Text(
+                                course.description ?? 'Sem descrição',
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                                style: const TextStyle(color: Colors.white70),
+                              ),
+                              const Spacer(),
+
+                              Padding(
+                                padding: const EdgeInsets.only(bottom: 20),
+                                child: Text(
+                                  'Preço: ${course.price!}',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.w900,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          width:  90.w,
-                          height:  90.h,
-                          
-                          )
-                      ],
-                                          ),
+                          Container(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: AssetImage(
+                                  'assets/loading_circles_blue_gradient.jpg',
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+
+                              borderRadius: BorderRadius.circular(13),
+                            ),
+                            width: 90.w,
+                            height: 90.h,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
                 ),
               );

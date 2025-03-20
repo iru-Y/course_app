@@ -29,7 +29,6 @@ class HomeBody extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: courses.length,
         itemBuilder: (context, index) {
-          final course = courses[index];
           return CourseCard();
         },
       ),

@@ -6,4 +6,5 @@ abstract class AppRoute {
   static const showVideo = '/show-video';
   static const profilePage = '/profile';
   static const progress = '/progress';
+  static const course = '/course ';
 }

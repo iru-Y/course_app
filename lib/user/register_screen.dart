@@ -51,7 +51,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         _passwordController.text,
         _passwordCheckController.text,
       );
-     
+
       if (!mounted) return;
       Navigator.pushNamedAndRemoveUntil(
         context,
@@ -114,11 +114,10 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 25.w),
+                  padding: EdgeInsets.symmetric(horizontal: 10.w),
                   child: GestureDetector(
                     onTap: _isLoading ? null : _submitForm,
                     child: Container(
-                      margin: EdgeInsets.only(top: 24.h),
                       width: 342.w,
                       height: 55.h,
                       decoration: BoxDecoration(
@@ -178,15 +177,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         'Pular',
                         style: TextStyle(color: Color(0xFF5C4BAF)),
                       ),
-                      
                     ),
-                     InkWell(
-                      onTap: () => Navigator.pushNamed(context, AppRoute.progress),
+                    InkWell(
+                      onTap:
+                          () => Navigator.pushNamed(context, AppRoute.progress),
                       child: Text(
                         'Progress',
                         style: TextStyle(color: Color(0xFF5C4BAF)),
                       ),
-                      
                     ),
                   ],
                 ),

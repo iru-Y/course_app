@@ -1,6 +1,7 @@
 import 'package:course_app/app_routes.dart';
 import 'package:course_app/course/course_page.dart';
 import 'package:course_app/home/home_screen.dart';
+import 'package:course_app/notifier/user_notifier.dart';
 import 'package:course_app/progress/progress_page.dart';
 import 'package:course_app/user/login_screen.dart';
 import 'package:course_app/user/profile_user.dart';
@@ -9,10 +10,15 @@ import 'package:course_app/video/video_player_page.dart';
 import 'package:course_app/video/video_upload.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
-  await ScreenUtil.ensureScreenSize(); 
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (_) => UserNotifier())],
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -24,9 +30,7 @@ class MyApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       child: MaterialApp(
-      theme: ThemeData(
-        fontFamily: 'Poppins'
-      ),
+        theme: ThemeData(fontFamily: 'Poppins'),
         routes: {
           AppRoute.register: (context) => const RegisterScreen(),
           AppRoute.login: (context) => const LoginScreen(),
@@ -35,7 +39,7 @@ class MyApp extends StatelessWidget {
           AppRoute.showVideo: (context) => const VideoPlayerPage(),
           AppRoute.profilePage: (context) => const ProfileUser(),
           AppRoute.progress: (context) => const ProgressPage(),
-          AppRoute.course: (context) =>const  CoursePage()
+          AppRoute.course: (context) => const CoursePage(),
         },
       ),
     );

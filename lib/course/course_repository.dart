@@ -26,15 +26,5 @@ class CourseRepository {
     }
   }
 
-  Future<CourseModel?> getUserByEmail(String email) async {
-    final response = await http.get(Uri.parse("$apiPath/v1/course/{email}"));
-
-    if (response.statusCode == 200) {
-      final jsonResponse = jsonDecode(response.body);
-
-      return jsonResponse;
-    } else {
-      throw Exception ('Fala ao carregar cursos por email : ${response.statusCode}');
-    }
-  }
+  
 }

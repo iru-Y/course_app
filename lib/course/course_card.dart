@@ -2,8 +2,10 @@ import 'dart:math';
 import 'package:course_app/app_routes.dart';
 import 'package:course_app/course/course_model.dart';
 import 'package:course_app/course/course_repository.dart';
+import 'package:course_app/notifier/user_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class CourseCard extends StatelessWidget {
   const CourseCard({super.key});
@@ -31,6 +33,8 @@ class CourseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+
     final courseRepository = CourseRepository();
 
     return FutureBuilder<List<CourseModel>>(

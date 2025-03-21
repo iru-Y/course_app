@@ -1,29 +1,51 @@
-import 'package:course_app/course/course_model.dart';
-import 'package:course_app/course/course_repository.dart';
-import 'package:course_app/user/login_model.dart';
-import 'package:course_app/user/login_repo.dart';
+import 'package:course_app/notifier/user_notifier.dart';
+import 'package:course_app/user/user_model.dart';
+import 'package:course_app/user/user_repo.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class CoursePage extends StatelessWidget {
+class CoursePage extends StatefulWidget {
   const CoursePage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final CourseRepository courseRepository = CourseRepository();
-    final CourseModel courseModel = CourseModel();
-    final LoginModel loginModel = LoginModel();
-    final LoginRepo loginRepo = LoginRepo();
-    fetchMail() {
-      
-    }
+  State<CoursePage> createState() => _CoursePageState();
+}
 
-    return FutureBuilder(
-      future: courseRepository.getUserByEmail(loginModel.email!),
+class _CoursePageState extends State<CoursePage> {
+  @override
+  Widget build(BuildContext context) {
+    final UserRepo userRepository = UserRepo();
+    final userNotifier = Provider.of<UserNotifier>(context).userModel;
+
+    final userEmail = userNotifier.email ?? '';
+
+    return FutureBuilder<UserModel?>(
+      future: userRepository.getUserByEmail(userEmail),
       builder: (context, snapshot) {
-        return Column(children: [Container(child: Column(children: [
-                    
-                ],
-              ))]);
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
+
+        if (snapshot.hasError) {
+          return Text("Erro: ${snapshot.error}");
+        }
+
+        final user = snapshot.data;
+        final email = user?.email;
+        print('email $email');
+        return SafeArea(
+          child: Scaffold(
+            body: Column(
+              children: [
+                Center(
+                  child: Container(
+                    child: Column(children: [Text(email ?? 'emeeeeeail@email.com')]),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
       },
     );
   }

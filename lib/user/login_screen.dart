@@ -1,9 +1,11 @@
 import 'package:course_app/app_routes.dart';
+import 'package:course_app/notifier/user_notifier.dart';
 import 'package:course_app/user/login_repo.dart';
 import 'package:course_app/widgets/custom_form.dart';
 import 'package:course_app/widgets/default_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -21,6 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
   void dispose() {
     _emailController.dispose();
     _passwordController.dispose();
+    loginRepo;
     super.dispose();
   }
 
@@ -36,8 +39,9 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     try {
-      
       await loginRepo.login(email, password);
+      final userNotifier = Provider.of<UserNotifier>(context, listen: false);
+      userNotifier.setEmail(email);
       Navigator.pushNamed(context, AppRoute.home);
     } catch (e) {
       ScaffoldMessenger.of(

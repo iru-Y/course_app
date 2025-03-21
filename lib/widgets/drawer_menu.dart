@@ -14,8 +14,8 @@ class DrawerMenu extends StatelessWidget {
     final String userEmail = ''; 
     final userRepo = UserRepo();
 
-    return FutureBuilder<UserModel>(
-      future: userRepo.getUser('email2@email.com'),
+    return FutureBuilder(
+      future: userRepo.getUser('email@email.com'),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Drawer(
@@ -49,13 +49,13 @@ class DrawerMenu extends StatelessWidget {
               children: [
                 ListTile(
                   title: Text(
-                    user!.name!,
+                    user.name ?? "eu",
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  subtitle: Text(user!.email!),
+                  subtitle: Text(user.email ?? 'email@email.com'),
                 ),
                 ListTile(
                   leading: const Icon(Icons.person),
@@ -68,13 +68,13 @@ class DrawerMenu extends StatelessWidget {
                 ),
                 ListTile(
                   leading: Icon(
-                    user!.premiumAccess! 
+                    user.premiumAccess ?? true 
                       ? Icons.star
                       : Icons.star_border,
-                    color: user!.premiumAccess! ? Colors.amber : null,
+                    color: user.premiumAccess ?? true ? Colors.amber : null,
                   ),
                   title: Text(
-                    user.premiumAccess!
+                    user.premiumAccess ?? false
                       ? 'Conta Premium'
                       : 'Atualizar para Premium',
                   ),

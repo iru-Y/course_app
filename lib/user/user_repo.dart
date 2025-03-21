@@ -12,9 +12,7 @@ class UserRepo {
       print('Response Body: ${response.body}');
 
       if (response.statusCode == 200) {
-        final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
-
-        // A resposta direta do endpoint /user/{email} é o objeto do usuário
+        final jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
         return UserModel.fromJson(jsonResponse);
       } else {
         throw Exception('Falha ao carregar usuário: ${response.statusCode}');
@@ -25,18 +23,6 @@ class UserRepo {
     }
   }
 
-  Future<UserModel?> getUserByEmail(String email) async {
-    final response = await http.get(Uri.parse("$apiPath/v1/user/$email"));
-
-    if (response.statusCode == 200) {
-      final jsonResponse = jsonDecode(response.body);
-      var resp = UserModel.fromJson(jsonResponse);
-      print('resposta do getuserbyemail: $resp');
-      return resp;
-    } else {
-      throw Exception(
-        'Falha ao carregar cursos por email : ${response.statusCode}',
-      );
-    }
-  }
+  // Método removido para evitar duplicação
+  // Future<UserModel?> getUserByEmail(...)
 }

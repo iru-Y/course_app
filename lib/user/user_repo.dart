@@ -8,17 +8,14 @@ class UserRepo {
     try {
       final response = await http.get(Uri.parse("$apiPath/v1/user/$email"));
 
-      print('Status Code: ${response.statusCode}');
-      print('Response Body: ${response.body}');
-
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
+        
+        if (!jsonResponse.containsKey('user')) {
+          throw Exception('Resposta da API não contém dados do usuário');
+        }
 
-        final userData = jsonResponse['user'] as Map<String, dynamic>;
-
-        return UserModel.fromJson(
-          userData,
-        ); 
+        return UserModel.fromJson(jsonResponse['user']);
       } else {
         throw Exception('Falha ao carregar usuário: ${response.statusCode}');
       }

@@ -1,8 +1,8 @@
 import 'package:course_app/app_routes.dart';
-import 'package:course_app/course/course_page.dart';
+import 'package:course_app/course/user_progress.dart';
 import 'package:course_app/home/home_screen.dart';
+import 'package:course_app/notifier/progress_notifier.dart';
 import 'package:course_app/notifier/user_notifier.dart';
-import 'package:course_app/progress/progress_page.dart';
 import 'package:course_app/user/login_screen.dart';
 import 'package:course_app/user/profile_user.dart';
 import 'package:course_app/user/register_screen.dart';
@@ -15,7 +15,10 @@ import 'package:provider/provider.dart';
 void main() async {
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => UserNotifier())],
+      providers: [ChangeNotifierProvider(create: (_) => UserNotifier()),
+       ChangeNotifierProvider(create: (_) => ProgressNotifier()),
+      
+      ],
       child: const MyApp(),
     ),
   );
@@ -38,8 +41,7 @@ class MyApp extends StatelessWidget {
           AppRoute.videoUpload: (context) => const VideoUpload(),
           AppRoute.showVideo: (context) => const VideoPlayerPage(),
           AppRoute.profilePage: (context) => const ProfileUser(),
-          AppRoute.progress: (context) => const ProgressPage(),
-          AppRoute.course: (context) => const CoursePage(),
+          AppRoute.course: (context) => const UserProgress(),
         },
       ),
     );

@@ -1,18 +1,19 @@
 // user_notifier.dart
 import 'package:flutter/material.dart';
+import 'package:course_app/user/user_model.dart';
 
 class UserNotifier with ChangeNotifier {
-  String? _email;
+  UserModel? _user;
 
-  String? get email => _email;
+  UserModel? get user => _user;
 
-  void setEmail(String newEmail) {
-    _email = newEmail;
+  void setUser(UserModel user) {
+    _user = user;
     notifyListeners();
   }
 
   void clearUser() {
-    _email = null;
+    _user = null;
     notifyListeners();
   }
 }

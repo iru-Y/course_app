@@ -1,7 +1,8 @@
-// login_screen.dart
 import 'package:course_app/app_routes.dart';
 import 'package:course_app/notifier/user_notifier.dart';
 import 'package:course_app/user/login_repo.dart';
+import 'package:course_app/user/user_model.dart';
+import 'package:course_app/user/user_repo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,8 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final LoginRepo loginRepo = LoginRepo();
+  final LoginRepo _loginRepo = LoginRepo();
+  final UserRepo _userRepo = UserRepo();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
@@ -23,26 +25,32 @@ class _LoginScreenState extends State<LoginScreen> {
     final password = _passwordController.text.trim();
     
     if (email.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Preencha todos os campos')),
-      );
+      _showErrorSnackbar('Preencha todos os campos');
       return;
     }
 
     try {
-      // Simulação de login bem-sucedido
-      await loginRepo.login(email, password);
+      // 1. Faz o login
+      await _loginRepo.login(email, password);
       
-      // Atualiza o UserNotifier com o email
+      // 2. Busca os dados completos do usuário
+      final UserModel user = await _userRepo.getUser(email);
+      
+      // 3. Atualiza o UserNotifier com o UserModel completo
       final userNotifier = Provider.of<UserNotifier>(context, listen: false);
-      userNotifier.setEmail(email);
+      userNotifier.setUser(user);
       
+      // 4. Navega para a tela inicial
       Navigator.pushNamed(context, AppRoute.home);
     } catch (e) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Erro: $e')),
-      );
+      _showErrorSnackbar('Erro ao fazer login: $e');
     }
+  }
+
+  void _showErrorSnackbar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 
   @override
@@ -57,7 +65,10 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 13.w, vertical: 16.h),
+          padding: EdgeInsets.symmetric(
+            horizontal: 13.w, 
+            vertical: 16.h
+          ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -71,34 +82,60 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               SizedBox(height: 24.h),
-              TextFormField(
-                controller: _emailController,
-                decoration: InputDecoration(
-                  labelText: 'E-mail',
-                  border: OutlineInputBorder(),
-                ),
-              ),
+              _buildEmailField(),
               SizedBox(height: 16.h),
-              TextFormField(
-                controller: _passwordController,
-                obscureText: true,
-                decoration: InputDecoration(
-                  labelText: 'Senha',
-                  border: OutlineInputBorder(),
-                ),
-              ),
+              _buildPasswordField(),
               SizedBox(height: 24.h),
-              ElevatedButton(
-                onPressed: _performLogin,
-                child: Text('Entrar'),
-              ),
-              TextButton(
-                onPressed: () => Navigator.pushNamed(context, AppRoute.register),
-                child: Text('Criar nova conta'),
-              ),
+              _buildLoginButton(),
+              _buildRegisterButton(),
             ],
           ),
         ),
+      ),
+    );
+  }
+
+  Widget _buildEmailField() {
+    return TextFormField(
+      controller: _emailController,
+      decoration: const InputDecoration(
+        labelText: 'E-mail',
+        border: OutlineInputBorder(),
+      ),
+      keyboardType: TextInputType.emailAddress,
+    );
+  }
+
+  Widget _buildPasswordField() {
+    return TextFormField(
+      controller: _passwordController,
+      obscureText: true,
+      decoration: const InputDecoration(
+        labelText: 'Senha',
+        border: OutlineInputBorder(),
+      ),
+    );
+  }
+
+  Widget _buildLoginButton() {
+    return ElevatedButton(
+      onPressed: _performLogin,
+      style: ElevatedButton.styleFrom(
+        minimumSize: Size(double.infinity, 50.h),
+      ),
+      child: Text(
+        'Entrar',
+        style: TextStyle(fontSize: 18.sp),
+      ),
+    );
+  }
+
+  Widget _buildRegisterButton() {
+    return TextButton(
+      onPressed: () => Navigator.pushNamed(context, AppRoute.register),
+      child: Text(
+        'Criar nova conta',
+        style: TextStyle(fontSize: 16.sp),
       ),
     );
   }

@@ -13,7 +13,12 @@ class UserRepo {
 
       if (response.statusCode == 200) {
         final jsonResponse = jsonDecode(response.body) as Map<String, dynamic>;
-        return UserModel.fromJson(jsonResponse);
+
+        final userData = jsonResponse['user'] as Map<String, dynamic>;
+
+        return UserModel.fromJson(
+          userData,
+        ); 
       } else {
         throw Exception('Falha ao carregar usuário: ${response.statusCode}');
       }
@@ -22,7 +27,4 @@ class UserRepo {
       rethrow;
     }
   }
-
-  // Método removido para evitar duplicação
-  // Future<UserModel?> getUserByEmail(...)
 }

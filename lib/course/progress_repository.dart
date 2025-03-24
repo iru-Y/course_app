@@ -5,7 +5,6 @@ import 'package:course_app/api_path.dart';
 import 'package:course_app/course/progress_model.dart';
 
 class ProgressRepo {
-  // No ProgressRepo
 Future<ProgressResponse> getProgress(String userId, String courseId) async {
   try {
     final response = await http.get(

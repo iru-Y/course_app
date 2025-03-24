@@ -4,6 +4,7 @@ import 'package:course_app/notifier/course_notifier.dart';
 import 'package:course_app/notifier/progress_notifier.dart';
 import 'package:course_app/notifier/user_notifier.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class ProgressCard extends StatefulWidget {
@@ -19,7 +20,6 @@ class _ProgressCardState extends State<ProgressCard> {
     final userNotifier = Provider.of<UserNotifier>(context);
     final courseId = ModalRoute.of(context)!.settings.arguments;
     final progressNotifier = Provider.of<ProgressNotifier>(context);
-    final courseRepository = CourseRepository();
     final courseNotifier = Provider.of<CourseNotifier>(context);
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -40,43 +40,42 @@ class _ProgressCardState extends State<ProgressCard> {
                 return const Center(child: CircularProgressIndicator());
               }
 
-              final progress = progressNotifier.progress?.progress ;
+              final progress = progressNotifier.progress?.progress;
               final formattedDate =
                   "${progress?.lastAccessedAt?.day}/${progress?.lastAccessedAt?.month}/${progress?.lastAccessedAt?.year}";
 
-              return Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Column(
-                    children: [
-                      _buildInfoRow('Último acesso', formattedDate),
-                      _buildInfoRow(
-                        'Módulos completados',
-                        progress?.completedModules.length.toString(),
+              return ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: progress?.completedVideos.length,
+                itemBuilder:
+                    (context, index) => Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(20.sp),
                       ),
-                      _buildInfoRow(
-                        'Vídeos assistidos',
-                        progress?.completedVideos.length.toString(),
+                      width: 369.w,
+                      height: 178.h,
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              progress!.completedVideos[index]!.title ??
+                                  "Sem vídeos completos",
+                            ),
+                             Text(
+                              progress!.completedVideos[index]!.description ??
+                                  "Sem vídeos completos",
+                            ),
+                           
+                          ],
+                        ),
                       ),
-                    ],
-                  ),
-                ),
+                    ),
               );
             },
           ),
-    );
-  }
-
-  Widget _buildInfoRow(String? label, String? value) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Text(label ?? "label", style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text(value ?? "value"),
-        ],
-      ),
     );
   }
 }

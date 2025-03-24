@@ -17,16 +17,17 @@ class CourseModel {
   });
 
   CourseModel.fromJson(Map<String, dynamic> json) {
-  id = json['id'];
-  title = json['title'];
-  description = json['description'];
-  price = json['price'];
-  modules = json['modules'] != null 
-      ? List<String>.from(json['modules'])
-      : [];
-  lifetime = json['lifetime'];
-  premium = json['premium'];
-}
+    id = json['_id']; 
+    title = json['title'];
+    description = json['description'];
+    price = json['price'];
+    modules = json['modules'] != null 
+        ? List<String>.from(json['modules'])
+        : [];
+    lifetime = json['lifetime'];
+    premium = json['premium'];
+  }
+
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();

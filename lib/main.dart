@@ -1,6 +1,7 @@
 import 'package:course_app/app_routes.dart';
 import 'package:course_app/course/user_progress.dart';
 import 'package:course_app/home/home_screen.dart';
+import 'package:course_app/notifier/course_notifier.dart';
 import 'package:course_app/notifier/progress_notifier.dart';
 import 'package:course_app/notifier/user_notifier.dart';
 import 'package:course_app/user/login_screen.dart';
@@ -17,6 +18,7 @@ void main() async {
     MultiProvider(
       providers: [ChangeNotifierProvider(create: (_) => UserNotifier()),
        ChangeNotifierProvider(create: (_) => ProgressNotifier()),
+         ChangeNotifierProvider(create: (_) => CourseNotifier()),
       
       ],
       child: const MyApp(),

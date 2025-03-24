@@ -30,17 +30,13 @@ class _LoginScreenState extends State<LoginScreen> {
     }
 
     try {
-      // 1. Faz o login
       await _loginRepo.login(email, password);
       
-      // 2. Busca os dados completos do usuário
       final UserModel user = await _userRepo.getUser(email);
       
-      // 3. Atualiza o UserNotifier com o UserModel completo
       final userNotifier = Provider.of<UserNotifier>(context, listen: false);
       userNotifier.setUser(user);
       
-      // 4. Navega para a tela inicial
       Navigator.pushNamed(context, AppRoute.home);
     } catch (e) {
       _showErrorSnackbar('Erro ao fazer login: $e');

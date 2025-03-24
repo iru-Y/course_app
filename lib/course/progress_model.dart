@@ -1,29 +1,27 @@
-// progress_model.dart
-// progress_model.dart
 class ProgressResponse {
   final String message;
-  final ProgressModel progress;
+  final ProgressModel? progress; 
 
-  ProgressResponse({
-    required this.message,
-    required this.progress,
-  });
+  ProgressResponse({required this.message, this.progress});
 
   factory ProgressResponse.fromJson(Map<String, dynamic> json) {
     return ProgressResponse(
-      message: json['message'],
-      progress: ProgressModel.fromJson(json['progress']),
+      message: json['message'] as String? ?? '',
+      progress:
+          json['progress'] != null
+              ? ProgressModel.fromJson(json['progress'] as Map<String, dynamic>)
+              : null,
     );
   }
 }
 
 class ProgressModel {
-  final String id;
-  final String courseId;
-  final String userId;
-  final List<CompletedModule> completedModules;
-  final List<CompletedVideo> completedVideos;
-  final DateTime lastAccessedAt;
+  final String? id;
+  final String? courseId;
+  final String? userId;
+  final List<CompletedModule?> completedModules;
+  final List<CompletedVideo?> completedVideos;
+  final DateTime? lastAccessedAt;
 
   ProgressModel({
     required this.id,
@@ -36,29 +34,38 @@ class ProgressModel {
 
   factory ProgressModel.fromJson(Map<String, dynamic> json) {
     return ProgressModel(
-      id: json['_id'],
-      courseId: json['course'],
-      userId: json['user'],
-      completedModules: (json['completedModule'] as List)
-          .map((module) => CompletedModule.fromJson(module))
-          .toList(),
-      completedVideos: (json['completedVideos'] as List)
-          .map((video) => CompletedVideo.fromJson(video))
-          .toList(),
-      lastAccessedAt: DateTime.parse(json['lastAccessedAt']),
+      id: json['_id'] as String? ?? '',
+      courseId: json['course'] as String? ?? '',
+      userId: json['user'] as String? ?? '',
+      completedModules:
+          (json['completedModules'] as List<dynamic>?)
+              ?.map(
+                (module) =>
+                    CompletedModule.fromJson(module as Map<String, dynamic>),
+              )
+              .toList() ??
+          [],
+      completedVideos:
+          (json['completedVideos'] as List<dynamic>?)
+              ?.map(
+                (video) =>
+                    CompletedVideo.fromJson(video as Map<String, dynamic>),
+              )
+              .toList() ??
+          [],
+      lastAccessedAt: DateTime.parse(
+        json['lastAccessedAt'] as String? ?? DateTime.now().toIso8601String(),
+      ),
     );
   }
 }
 
-// ... (CompletedModule e CompletedVideo permanecem iguais)
-
-// --------------------------------------------------
 class CompletedModule {
-  final String id;
-  final String title;
-  final String description;
-  final List<String> videos;
-  final String introVideo;
+  final String? id;
+  final String? title;
+  final String? description;
+  final List<String?> videos;
+  final String? introVideo;
 
   CompletedModule({
     required this.id,
@@ -81,10 +88,10 @@ class CompletedModule {
 
 // --------------------------------------------------
 class CompletedVideo {
-  final String id;
-  final String title;
-  final String description;
-  final String url;
+  final String? id;
+  final String? title;
+  final String? description;
+  final String? url;
 
   CompletedVideo({
     required this.id,

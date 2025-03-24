@@ -1,5 +1,3 @@
-// course_page.dart
-import 'package:course_app/course/course_card.dart';
 import 'package:course_app/course/progress_card.dart';
 import 'package:course_app/notifier/user_notifier.dart';
 import 'package:course_app/user/user_model.dart';

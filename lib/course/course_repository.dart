@@ -26,5 +26,20 @@ class CourseRepository {
     }
   }
 
-  
+  Future<CourseModel> getCourseById(String id) async {
+    try {
+      final response = await http.get(Uri.parse('$apiPath/v1/course/$id'));
+      if (response.statusCode == 200) {
+        final jsonResponse = jsonDecode(response.body);
+        final course = CourseModel.fromJson(jsonResponse['course']);
+        return course;
+      } else {
+        throw Exception(
+          'Falha ao carregar cursos por id: ${response.statusCode}',
+        );
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
 }

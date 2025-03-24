@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:course_app/app_routes.dart';
 import 'package:course_app/course/course_model.dart';
 import 'package:course_app/course/course_repository.dart';
+import 'package:course_app/notifier/course_notifier.dart';
 import 'package:course_app/notifier/user_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -33,8 +34,6 @@ class CourseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-
     final courseRepository = CourseRepository();
 
     return FutureBuilder<List<CourseModel>>(
@@ -60,16 +59,19 @@ class CourseCard extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemCount: courses.length,
             itemBuilder: (context, index) {
-              final course = courses.first;
+              final course = courses[index];
               return SizedBox(
                 width: 324.w,
                 child: InkWell(
-                  onTap:
-                      () => {
-                        Navigator.of(
-                          context,
-                        ).pushNamed(AppRoute.course, arguments: course.id),
-                      },
+                  onTap: () {
+                    Provider.of<CourseNotifier>(
+                      context,
+                      listen: false,
+                    ).setCourse(course);
+                    Navigator.of(
+                      context,
+                    ).pushNamed(AppRoute.course, arguments: course.id);
+                  },
                   child: Card(
                     margin: const EdgeInsets.symmetric(
                       vertical: 8,

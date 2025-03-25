@@ -16,10 +16,10 @@ import 'package:provider/provider.dart';
 void main() async {
   runApp(
     MultiProvider(
-      providers: [ChangeNotifierProvider(create: (_) => UserNotifier()),
-       ChangeNotifierProvider(create: (_) => ProgressNotifier()),
-         ChangeNotifierProvider(create: (_) => CourseNotifier()),
-      
+      providers: [
+        ChangeNotifierProvider(create: (_) => UserNotifier()),
+        ChangeNotifierProvider(create: (_) => ProgressNotifier()),
+        ChangeNotifierProvider(create: (_) => CourseNotifier()),
       ],
       child: const MyApp(),
     ),
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
           AppRoute.home: (context) => const HomeScreen(),
           AppRoute.videoUpload: (context) => const VideoUpload(),
           AppRoute.showVideo: (context) => const VideoPlayerPage(),
-          AppRoute.profilePage: (context) => const ProfileUser(),
+          AppRoute.profileUser: (context) => const ProfileUser(),
           AppRoute.course: (context) => const UserProgress(),
         },
       ),

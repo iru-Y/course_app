@@ -5,13 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class DrawerMenu extends StatelessWidget {
-  
-
   const DrawerMenu({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final String userEmail = ''; 
+    final String userEmail = '';
     final userRepo = UserRepo();
 
     return FutureBuilder(
@@ -24,11 +22,7 @@ class DrawerMenu extends StatelessWidget {
         }
 
         if (snapshot.hasError) {
-          return Drawer(
-            child: Center(
-              child: Text('Erro: ${snapshot.error}'),
-            ),
-          );
+          return Drawer(child: Center(child: Text('Erro: ${snapshot.error}')));
         }
 
         if (!snapshot.hasData) {
@@ -41,10 +35,7 @@ class DrawerMenu extends StatelessWidget {
 
         return Drawer(
           child: Padding(
-            padding: EdgeInsets.symmetric(
-              vertical: 20.w,
-              horizontal: 10.h,
-            ),
+            padding: EdgeInsets.symmetric(vertical: 20.w, horizontal: 10.h),
             child: Column(
               children: [
                 ListTile(
@@ -60,23 +51,22 @@ class DrawerMenu extends StatelessWidget {
                 ListTile(
                   leading: const Icon(Icons.person),
                   title: const Text('Perfil'),
-                  onTap: () => Navigator.pushNamed(
-                    context,
-                    AppRoute.profilePage,
-                    arguments: user,
-                  ),
+                  onTap:
+                      () => Navigator.pushNamed(
+                        context,
+                        AppRoute.profileUser,
+                        arguments: user,
+                      ),
                 ),
                 ListTile(
                   leading: Icon(
-                    user.premiumAccess ?? true 
-                      ? Icons.star
-                      : Icons.star_border,
+                    user.premiumAccess ?? true ? Icons.star : Icons.star_border,
                     color: user.premiumAccess ?? true ? Colors.amber : null,
                   ),
                   title: Text(
                     user.premiumAccess ?? false
-                      ? 'Conta Premium'
-                      : 'Atualizar para Premium',
+                        ? 'Conta Premium'
+                        : 'Atualizar para Premium',
                   ),
                 ),
               ],

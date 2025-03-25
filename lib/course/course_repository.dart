@@ -8,9 +8,6 @@ class CourseRepository {
     try {
       final response = await http.get(Uri.parse("$apiPath/v1/course"));
 
-      print('Status Code: ${response.statusCode}');
-      print('Response Body: ${response.body}');
-
       if (response.statusCode == 200) {
         final Map<String, dynamic> jsonResponse = jsonDecode(response.body);
 

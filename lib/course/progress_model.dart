@@ -1,16 +1,24 @@
+// progress_model.dart
 class ProgressResponse {
   final String message;
-  final ProgressModel? progress; 
+  final ProgressModel? progress;
+  final String? percentage; // Novo campo para porcentagem
 
-  ProgressResponse({required this.message, this.progress});
+  ProgressResponse({
+    required this.message,
+    this.progress,
+    this.percentage
+  });
 
   factory ProgressResponse.fromJson(Map<String, dynamic> json) {
     return ProgressResponse(
       message: json['message'] as String? ?? '',
-      progress:
-          json['progress'] != null
-              ? ProgressModel.fromJson(json['progress'] as Map<String, dynamic>)
-              : null,
+      progress: json['progress'] is Map // Verifica se é um objeto
+          ? ProgressModel.fromJson(json['progress'] as Map<String, dynamic>)
+          : null,
+      percentage: json['progress'] is String // Verifica se é String
+          ? json['progress'] as String?
+          : null,
     );
   }
 }

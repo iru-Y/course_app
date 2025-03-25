@@ -63,7 +63,7 @@ class UserProgress extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w900,
-                            fontSize: 20.sp,
+                            fontSize: 14.sp,
                           ),
                         ),
                         Text(
@@ -73,7 +73,7 @@ class UserProgress extends StatelessWidget {
                           style: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w900,
-                            fontSize: 20.sp,
+                            fontSize: 18.sp,
                           ),
                         ),
                       ],
